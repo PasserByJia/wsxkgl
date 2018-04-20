@@ -42,12 +42,12 @@ public final class StudentService {
         return studentDao.add(student);
     }
 
-    public boolean delete(Integer id)throws SQLException{
+    public boolean delete(Integer id)throws Exception{
         Student student = this.find(id);
         return this.delete(student);
     }
 
-    private boolean delete(Student student) throws SQLException {
+    private boolean delete(Student student) throws Exception {
         //获得进行事务的连接
         Connection connection = JdbcHelper.getConn();
         //将自动提交设为false,开始事务
@@ -71,7 +71,9 @@ public final class StudentService {
         }
         catch (SQLException e){
             //回滚
+
             connection.rollback();
+            throw new Exception("删除学生时,删除选课关系出错");
         }
         finally {
             //将自动提交设置为true，结束事务

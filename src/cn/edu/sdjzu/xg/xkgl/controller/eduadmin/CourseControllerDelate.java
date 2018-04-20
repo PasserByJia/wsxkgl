@@ -17,8 +17,9 @@ public class CourseControllerDelate  extends HttpServlet {
         int id = Helper.getIdFromRequest(request);
         try {
             CourseService.getInstance().delete(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            request.setAttribute("message",e.getMessage());
+            request.getRequestDispatcher("/pages/error.jsp").forward(request,response);
         }
         response.sendRedirect("/courseController");
     }

@@ -33,7 +33,8 @@ public class TeacherUpdateController  extends HttpServlet {
                 request.getRequestDispatcher("/pages/sysadmin/teacher/update.jsp").forward(request,response);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            request.setAttribute("message","更新密码失败");
+            request.getRequestDispatcher("/pages/error.jsp").forward(request,response);
         }
     }
     @Override
@@ -49,7 +50,8 @@ public class TeacherUpdateController  extends HttpServlet {
             TeacherService.getInstance().update(teacherFromDB);
             response.sendRedirect("teacherController");
         } catch (SQLException e) {
-            e.printStackTrace();
+            request.setAttribute("message","更新教师信息失败");
+            request.getRequestDispatcher("/pages/error.jsp").forward(request,response);
         }
     }
 }

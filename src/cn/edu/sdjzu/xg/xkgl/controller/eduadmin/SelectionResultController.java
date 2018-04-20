@@ -41,7 +41,8 @@ public class SelectionResultController extends HttpServlet {
             req.setAttribute("courses",courses);
             req.getRequestDispatcher("/pages/eduadmin/selection/selectionResult.jsp").forward(req,resp);
         }catch (SQLException e) {
-            e.printStackTrace();
+            req.setAttribute("message","查询失败");
+            req.getRequestDispatcher("/pages/error.jsp").forward(req,resp);
         }
     }
 }

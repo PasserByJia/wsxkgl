@@ -44,7 +44,8 @@ public class EduAdminController extends HttpServlet {
             req.getRequestDispatcher("/pages/sysadmin/eduadmin/list.jsp")
                     .forward(req,resp);
         }catch (SQLException e) {
-            e.printStackTrace();
+            req.setAttribute("message","查看教务管理员失败");
+            req.getRequestDispatcher("/pages/error.jsp").forward(req,resp);
         }
     }
 }

@@ -28,7 +28,8 @@ public class EditSelectionStatusController extends HttpServlet {
             }
             CourseService.getInstance().update(course);
         } catch (SQLException e) {
-            e.printStackTrace();
+            request.setAttribute("message","修改选课状态失败");
+            request.getRequestDispatcher("/pages/error.jsp").forward(request,response);
         }
 
         response.sendRedirect("/selectionResultController");

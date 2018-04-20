@@ -23,10 +23,9 @@ public class AddSelectionCourse extends HttpServlet {
         CourseSelection courseSelection = new CourseSelection(course,student);
         try {
             CourseSelectionService.getCourseSelectionService().add(courseSelection);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }catch (Exception e){
-
+        } catch (Exception e) {
+            req.setAttribute("message",e.getMessage());
+            req.getRequestDispatcher("/pages/error.jsp").forward(req,resp);
         }
         resp.sendRedirect("/selectionResultController");
     }

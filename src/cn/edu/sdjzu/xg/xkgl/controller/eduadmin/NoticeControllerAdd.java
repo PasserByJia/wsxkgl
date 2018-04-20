@@ -30,7 +30,8 @@ public class NoticeControllerAdd extends HttpServlet {
         try {
             NoticeService.getInstance().add(noticeToAdd);
         } catch (SQLException e) {
-            e.printStackTrace();
+            request.setAttribute("message","添加通知失败");
+            request.getRequestDispatcher("/pages/error.jsp").forward(request,response);
         }
         response.sendRedirect("/noticeControllerEdu");
 

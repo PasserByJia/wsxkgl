@@ -29,7 +29,8 @@ public class CourseControllerAdd extends HttpServlet{
             courseTypeCollection = CourseTypeService.getInstance().findAll();
             teacherCollection =TeacherService.getInstance().findAll();
         } catch (SQLException e) {
-            e.printStackTrace();
+            request.setAttribute("message","教师与课程类型查询出错");
+            request.getRequestDispatcher("/pages/error.jsp").forward(request,response);
         }
         request.setAttribute("courseTypeSet",courseTypeCollection);
         request.setAttribute("teacherSet",teacherCollection);
@@ -54,7 +55,8 @@ public class CourseControllerAdd extends HttpServlet{
             Course courseToAdd = new Course(no,title,max,min,0,hours,time,credit,false,teacher,courseType);
             CourseService.getInstance().add(courseToAdd);
         } catch (SQLException e) {
-            e.printStackTrace();
+            request.setAttribute("message","添加课程失败");
+            request.getRequestDispatcher("/pages/error.jsp").forward(request,response);
         }
         response.sendRedirect("/courseController");
     }

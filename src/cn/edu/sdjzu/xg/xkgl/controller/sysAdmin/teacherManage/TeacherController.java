@@ -17,19 +17,16 @@ import java.util.Collection;
 public class TeacherController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            //如果请求参数参数action的值为"delete"，则先执行删除操作
             if("delete".equals(request.getParameter("action"))){
                 TeacherService.getInstance().delete(Helper.getIdFromRequest(request));
             }
-            //获得所有的Teacher对象
             Collection<Teacher> teachers = TeacherService.getInstance().findAll();
-            //存入请求属性中
             request.setAttribute("teachers",teachers);
-            //转发到教师列表页面
             request.getRequestDispatcher("pages/sysadmin/teacher/list.jsp")
                     .forward(request,response);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            request.setAttribute("message",e.getMessage());
+            request.getRequestDispatcher("/pages/error.jsp").forward(request,response);
         }
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,7 +41,8 @@ public class TeacherController extends HttpServlet {
             req.getRequestDispatcher("pages/sysadmin/teacher/list.jsp")
                     .forward(req,resp);
         }catch (SQLException e) {
-            e.printStackTrace();
+            req.setAttribute("message","查询失败");
+            req.getRequestDispatcher("/pages/error.jsp").forward(req,resp);
         }
     }
 }

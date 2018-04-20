@@ -20,8 +20,9 @@ public class ExitCourseAcodingStuUsernameController extends HttpServlet{
         int courseSelectionId = Helper.getIdFromRequest(req,"courseSelectionId");
         try {
             CourseSelectionService.getCourseSelectionService().delete(courseSelectionId);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            req.setAttribute("message",e.getMessage());
+            req.getRequestDispatcher("/pages/error.jsp").forward(req,resp);
         }
         req.getRequestDispatcher("/pages/eduadmin/selection/ExitCourse.jsp").forward(req,resp);
 

@@ -41,12 +41,12 @@ public final class TeacherService {
         return teacherDao.add(teacher);
     }
     //删除一个教师
-    public boolean delete(Integer id) throws SQLException {
+    public boolean delete(Integer id) throws Exception {
         Teacher teacher = this.find(id);
         return this.delete(teacher);
     }
     //删除一个教师
-    public boolean delete(Teacher teacher) throws SQLException {
+    public boolean delete(Teacher teacher) throws Exception {
             //获得进行事务的连接，添加教师和添加用户都使用本连接
             Connection connection = JdbcHelper.getConn();
             //将自动提交设为false,开始事务
@@ -67,8 +67,8 @@ public final class TeacherService {
                 connection.commit();
             } catch (SQLException e) {
                 //回滚事务
-                e.printStackTrace();
                 connection.rollback();
+                throw new Exception("删除课程失败");
             } finally {
                 //将自动提交设置为true，结束事务
                 connection.setAutoCommit(true);

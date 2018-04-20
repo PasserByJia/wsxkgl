@@ -82,7 +82,7 @@ public final class CourseService {
         return deleted;
     }
 
-    public boolean delete(int course_id,Connection connection)throws SQLException {
+    public boolean delete(int course_id,Connection connection)throws Exception {
         boolean deleted = false;
         try {
             PreparedStatement preparedStatement =
@@ -96,6 +96,7 @@ public final class CourseService {
             CourseDao.getInstance().delete(course_id,connection);
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new Exception("删除课程对应选课关系失败");
         }
         return deleted;
     }

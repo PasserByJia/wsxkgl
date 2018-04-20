@@ -25,8 +25,9 @@ public class StudentController extends HttpServlet {
             request.setAttribute("students",students);
             request.getRequestDispatcher("pages/sysadmin/student/list.jsp")
                     .forward(request,response);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            request.setAttribute("message",e.getMessage());
+            request.getRequestDispatcher("/pages/error.jsp").forward(request,response);
         }
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,7 +41,8 @@ public class StudentController extends HttpServlet {
             req.getRequestDispatcher("pages/sysadmin/student/list.jsp")
                     .forward(req,resp);
         }catch (SQLException e) {
-            e.printStackTrace();
+            req.setAttribute("message","查询失败");
+            req.getRequestDispatcher("/pages/error.jsp").forward(req,resp);
         }
     }
 }

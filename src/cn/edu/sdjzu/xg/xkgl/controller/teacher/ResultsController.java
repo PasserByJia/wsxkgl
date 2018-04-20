@@ -26,7 +26,8 @@ public class  ResultsController extends HttpServlet{
            Collection<Course> coursesToReturn = CourseService.getInstance().findByTeacher(teacher);
            req.setAttribute("coursesToReturn",coursesToReturn);
        }catch (SQLException e){
-           e.printStackTrace();
+           req.setAttribute("message","查询选课结果失败");
+           req.getRequestDispatcher("/pages/error.jsp").forward(req,resp);
        }
        req.getRequestDispatcher("/pages/teacher/selectionResults.jsp").forward(req,resp);
     }

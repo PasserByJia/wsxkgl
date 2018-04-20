@@ -22,7 +22,8 @@ public class ExitCourseController extends HttpServlet {
         try {
             courseSelectionCollection = CourseSelectionService.getCourseSelectionService().findByStudentUsername(studentUsername);
         } catch (SQLException e) {
-            e.printStackTrace();
+            req.setAttribute("message","查询退选学生请确认学号是否输入正确");
+            req.getRequestDispatcher("/pages/error.jsp").forward(req,resp);
         }
         req.setAttribute("courseSelections",courseSelectionCollection);
         req.getRequestDispatcher("/pages/eduadmin/selection/ExitCourse.jsp").forward(req,resp);

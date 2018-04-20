@@ -27,7 +27,8 @@ public class EduAdminUpdateController extends HttpServlet {
                 request.getRequestDispatcher("/pages/sysadmin/eduadmin/update.jsp").forward(request,response);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            request.setAttribute("message","重置密码失败");
+            request.getRequestDispatcher("/pages/error.jsp").forward(request,response);
         }
     }
     @Override
@@ -45,7 +46,8 @@ public class EduAdminUpdateController extends HttpServlet {
             EduAdminService.getInstance().update(eduAdminFromDB);
             response.sendRedirect("eduAdminController");
         } catch (SQLException e) {
-            e.printStackTrace();
+            request.setAttribute("message","更新教务管理员信息失败");
+            request.getRequestDispatcher("/pages/error.jsp").forward(request,response);
         }
     }
 }

@@ -69,7 +69,7 @@ public final class CourseSelectionService {
         }
         return update;
     }
-    public boolean  delete(int id)throws SQLException{
+    public boolean  delete(int id)throws Exception{
         CourseSelection courseSelection = this.find(id);
         boolean delete=false;
         Connection connection=JdbcHelper.getConn();
@@ -80,8 +80,8 @@ public final class CourseSelectionService {
             course.setAccumulation(course.getAccumulation()-1);
             delete =CourseDao.getInstance().update(course,connection);
         }catch (SQLException e) {
-            e.printStackTrace();
             connection.rollback();
+            throw new Exception("删除课程失败");
         } finally {
             connection.setAutoCommit(true);
             JdbcHelper.close(preparedStatement,connection);

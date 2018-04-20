@@ -21,7 +21,8 @@ public class NoticeControllerEdu extends HttpServlet {
         try {
             notices = NoticeService.getInstance().findAll();
         } catch (SQLException e) {
-            e.printStackTrace();
+            req.setAttribute("message","选课结果查询出错");
+            req.getRequestDispatcher("/pages/error.jsp").forward(req,resp);
         }
         req.setAttribute("notices",notices);
         req.getRequestDispatcher("/pages/eduadmin/notice/notices.jsp").forward(req,resp);

@@ -37,7 +37,8 @@ public class SelectionTimeController  extends HttpServlet {
             OpenPeriod openPeriod = new OpenPeriod(1,sqlDate1,sqlDate2);
             OpenPeriodService.getInstance().update(openPeriod);
         } catch (SQLException e) {
-            e.printStackTrace();
+            request.setAttribute("message","添加选课时间失败");
+            request.getRequestDispatcher("/pages/error.jsp").forward(request,response);
         }catch (ParseException e) {
             e.printStackTrace();
         }

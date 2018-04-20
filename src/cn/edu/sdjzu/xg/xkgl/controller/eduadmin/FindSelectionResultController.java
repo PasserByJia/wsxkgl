@@ -22,7 +22,8 @@ public class FindSelectionResultController extends HttpServlet {
         try {
             courseSelectionCollection = CourseSelectionService.getCourseSelectionService().findByCourseTitle(courseTitle);
         } catch (SQLException e) {
-            e.printStackTrace();
+            req.setAttribute("message","选课结果查询出错");
+            req.getRequestDispatcher("/pages/error.jsp").forward(req,resp);
         }
         req.setAttribute("courseSelections",courseSelectionCollection);
         req.getRequestDispatcher("/pages/eduadmin/selection/selectionResult.jsp").forward(req,resp);

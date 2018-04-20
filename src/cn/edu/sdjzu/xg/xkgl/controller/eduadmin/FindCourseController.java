@@ -25,7 +25,8 @@ public class FindCourseController extends HttpServlet {
         try{
             courses = CourseService.getInstance().findAll();
         }catch(SQLException e){
-            e.printStackTrace();
+            req.setAttribute("message","获取课程失败");
+            req.getRequestDispatcher("/pages/error.jsp").forward(req,resp);
         }
         req.setAttribute("course",courses);
         req.getRequestDispatcher("/pages/eduadmin/selection/addCourseForStudent/findCourse.jsp").forward(req,resp);
@@ -41,7 +42,8 @@ public class FindCourseController extends HttpServlet {
             student = StudentService.getInstance().findByUsername(studentNo);
             course =  CourseService.getInstance().find(id);
         } catch (SQLException e) {
-            e.printStackTrace();
+            req.setAttribute("message","添加选课失败");
+            req.getRequestDispatcher("/pages/error.jsp").forward(req,resp);
         }
         HttpSession httpSession = req.getSession();
         httpSession.setAttribute("student",student);

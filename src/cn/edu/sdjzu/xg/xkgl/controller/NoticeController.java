@@ -16,11 +16,11 @@ public class NoticeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Collection<Notice> notices = null;
-        System.out.println("===========================");
         try {
             notices = NoticeService.getInstance().findAll();
         } catch (SQLException e) {
-            e.printStackTrace();
+            req.setAttribute("message","获取通知失败");
+            req.getRequestDispatcher("/pages/error.jsp").forward(req,resp);
         }
         req.setAttribute("notices",notices);
         req.getRequestDispatcher("/pages/notice.jsp").forward(req,resp);

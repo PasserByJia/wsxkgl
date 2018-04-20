@@ -29,7 +29,8 @@ public class ResultsController extends HttpServlet{
                 System.out.println(cou);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            req.setAttribute("message","查看选课结果出错");
+            req.getRequestDispatcher("/pages/error.jsp").forward(req,resp);
         }
         req.setAttribute("courseSelections",courseSelections);
         req.getRequestDispatcher("/pages/student/selectionResults.jsp").forward(req,resp);
