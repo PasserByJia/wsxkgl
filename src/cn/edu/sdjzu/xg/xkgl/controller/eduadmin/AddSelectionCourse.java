@@ -25,6 +25,8 @@ public class AddSelectionCourse extends HttpServlet {
             CourseSelectionService.getCourseSelectionService().add(courseSelection);
         } catch (SQLException e) {
             e.printStackTrace();
+        }catch (Exception e){
+
         }
         resp.sendRedirect("/selectionResultController");
     }

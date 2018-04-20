@@ -23,7 +23,8 @@ public class EduAdminAddController extends HttpServlet {
             EduAdminService.getInstance().add(eduAdminToAdd);
             response.sendRedirect("eduAdminController");
         } catch (SQLException e) {
-            e.printStackTrace();
+            request.setAttribute("message","添加教务管理员失败");
+            request.getRequestDispatcher("/pages/error.jsp").forward(request,response);
         }
     }
 }

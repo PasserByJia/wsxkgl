@@ -28,7 +28,8 @@ public class TeacherAddController extends HttpServlet {
             Teacher teacherToAdd = new Teacher(no,"123456",name,no,sex,proTitle);
             TeacherService.getInstance().add(teacherToAdd);
         } catch (SQLException e) {
-            e.printStackTrace();
+            request.setAttribute("message","添加教师失败");
+            request.getRequestDispatcher("/pages/error.jsp").forward(request,response);
         }
         response.sendRedirect("teacherController");
     }

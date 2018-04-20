@@ -50,7 +50,8 @@ public class UpdatePasswordController extends HttpServlet {
                         break;
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                req.setAttribute("message","修改密码失败");
+                req.getRequestDispatcher("/pages/error.jsp").forward(req,resp);
             }
             //返回登录页面，提醒用户信息
             req.setAttribute("msg","<font color=red>密码修改成功</font>");

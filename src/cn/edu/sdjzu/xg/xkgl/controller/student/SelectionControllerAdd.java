@@ -33,10 +33,8 @@ public class SelectionControllerAdd extends HttpServlet {
             CourseSelectionService.getCourseSelectionService().add(courseSelectionToAdd);
             resp.sendRedirect("selectionController");
         } catch (Exception e) {
-            /*
-            * 异常处理
-            * e.getMessage();
-            * */
+            req.setAttribute("message",e.getMessage());
+            req.getRequestDispatcher("/pages/error.jsp").forward(req,resp);
         }
     }
 }

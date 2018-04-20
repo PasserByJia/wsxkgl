@@ -57,11 +57,11 @@ public final class CourseSelectionService {
                 //自定义异常
                 throw new Exception("选课人数超限");
             }
-
         }catch (SQLException e){
             connection.rollback();
             throw new Exception("选课失败");
         }catch (Exception e){
+            connection.rollback();
             throw e;
         }finally {
             connection.setAutoCommit(true);

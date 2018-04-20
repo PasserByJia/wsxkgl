@@ -24,7 +24,8 @@ public class StudentAddController extends HttpServlet {
             StudentService.getInstance().add(studentToAdd);
             response.sendRedirect("studentController");
         } catch (SQLException e) {
-            e.printStackTrace();
+            request.setAttribute("message","添加学生失败");
+            request.getRequestDispatcher("/pages/error.jsp").forward(request,response);
         }
     }
 }
