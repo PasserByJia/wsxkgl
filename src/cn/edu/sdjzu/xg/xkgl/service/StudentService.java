@@ -11,10 +11,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.List;
 
 public final class StudentService {
     private static StudentDao studentDao = StudentDao.getInstance();
     private static StudentService studentService = new StudentService();
+    public List<Student> studentList;
+
     private StudentService(){}
 
     public static StudentService getInstance(){

@@ -12,10 +12,10 @@ import java.sql.Statement;
 public final class JdbcHelper {
 	//private static String url =
 	// "jdbc:sqlserver://localhost:1433;databaseName=bysjs;SelectMethod=Cursor;";
-	private static String  url = "jdbc:mysql://localhost:3306/xkgl" +
+	private static String  url = "jdbc:mysql://localhost:3306/db" +
 			"?useUnicode=true&characterEncoding=utf8&useSSL=true";
 	private static String user = "root";
-	private static String password = "xgxg*#";
+	private static String password = "totoro";
 
 	// 不允许创建本类对象
 	private JdbcHelper() {}

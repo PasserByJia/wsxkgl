@@ -8,7 +8,9 @@ import cn.edu.sdjzu.xg.xkgl.service.StudentService;
 import util.JdbcHelper;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.TreeSet;
 
 public final class CourseSelectionDao {
@@ -57,6 +59,20 @@ public final class CourseSelectionDao {
         resultSet = preparedStatement.executeQuery();
         Collection<CourseSelection> courseSelections = mapResultSetToTeacher(resultSet);
         return courseSelections;
+    }
+
+    public List<Student> findStudentByCourseId(Integer course_id) throws SQLException{
+        String selectSql="SELECT * FROM courseselection WHERE course_id=?";
+        connection = JdbcHelper.getConn();
+        preparedStatement = connection.prepareStatement(selectSql);
+        preparedStatement.setInt(1,course_id);
+        resultSet = preparedStatement.executeQuery();
+        List<Student> students  = new ArrayList<Student>();
+        while(resultSet.next()){
+            int student_id =resultSet.getInt("student_id");
+            students.add(StudentService.getInstance().find(student_id));
+        }
+        return students;
     }
 
     public  Collection<CourseSelection> findByStudentUsername(String username)throws SQLException{

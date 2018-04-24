@@ -5,6 +5,7 @@ import cn.edu.sdjzu.xg.xkgl.dao.CourseDao;
 import cn.edu.sdjzu.xg.xkgl.dao.CourseSelectionDao;
 import cn.edu.sdjzu.xg.xkgl.domain.Course;
 import cn.edu.sdjzu.xg.xkgl.domain.CourseSelection;
+import cn.edu.sdjzu.xg.xkgl.domain.Student;
 import util.JdbcHelper;
 
 import java.awt.*;
@@ -12,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.List;
 
 public final class CourseSelectionService {
     private static CourseSelectionDao courseSelectionDao = CourseSelectionDao.getInstance();
@@ -28,6 +30,9 @@ public final class CourseSelectionService {
 
     public CourseSelection find(Integer id) throws SQLException{
         return courseSelectionDao.find(id);
+    }
+    public List<Student> findStudentByCourseId(Integer course_id) throws SQLException{
+        return courseSelectionDao.findStudentByCourseId(course_id);
     }
     public Collection<CourseSelection> findByCourseTitle(String courseTitle)throws SQLException{
         Course course = CourseService.getInstance().findOneByTitle(courseTitle);

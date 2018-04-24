@@ -36,9 +36,11 @@
                 <td>${course.time}</td>
                 <td>${course.accumulation}</td>
                 <td>
-                    <%--c:url var="deleteUrl" value="/teacherController?action=delete&id=${teacher.id}"/>--%>
-                    <a href="${deleteUrl}">导出学生名单</a>
+                    <c:url var="exportUrl"
+                           value="/exportController?courseId=${course.id}"/>
+                    <a href="${exportUrl}">导出学生名单</a>
                 </td>
+
             </tr>
     </c:forEach>
 </table>
