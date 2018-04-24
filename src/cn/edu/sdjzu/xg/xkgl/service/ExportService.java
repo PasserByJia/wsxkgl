@@ -89,7 +89,7 @@ public class ExportService {
         workbook.write(byteArrayOutputStream);
         byteArrayOutputStream.flush();
 
-        Utils.download(byteArrayOutputStream,response,request,"student.xlsx");
+        Utils.download(byteArrayOutputStream,response,request,"student.xls");
 
         return result;
     }
