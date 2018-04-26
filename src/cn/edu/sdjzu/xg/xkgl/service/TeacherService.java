@@ -1,6 +1,5 @@
 package cn.edu.sdjzu.xg.xkgl.service;
 
-import cn.edu.sdjzu.xg.xkgl.dao.CourseDao;
 import cn.edu.sdjzu.xg.xkgl.dao.TeacherDao;
 import cn.edu.sdjzu.xg.xkgl.domain.Teacher;
 import util.JdbcHelper;
@@ -77,6 +76,9 @@ public final class TeacherService {
             }
             return deleted;
         }
+    public Teacher findByNo(String teacher_no) throws SQLException{
+        return teacherDao.findByNo(teacher_no);
+    }
 }
 
 

@@ -13,6 +13,8 @@
 </head>
 <body>
 <h1>课程管理</h1>
+<c:url var="addcourseUrl" value="/pages/eduadmin/course/excleInputCourse.jsp"/>
+<a href="${addcourseUrl}">Excel导入课程</a>
     <c:url var="courseControllerAdd" value="/courseControllerAdd"/>
     <a href="${courseControllerAdd}">新建</a>
     <c:url var="find" value="/courseController" />

@@ -3,7 +3,10 @@ package cn.edu.sdjzu.xg.xkgl.dao;
 import cn.edu.sdjzu.xg.xkgl.domain.Teacher;
 import util.JdbcHelper;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.TreeSet;
 
@@ -12,7 +15,7 @@ public class TeacherDao {
     private static Connection conn = null;
     private static ResultSet rs = null;
     private static PreparedStatement pstmt = null;
-    private TeacherDao (){}
+    private TeacherDao(){}
     public static TeacherDao getInstance(){return  teacherDao;}
 
     public Collection<Teacher> findAll()throws SQLException{
@@ -47,12 +50,30 @@ public class TeacherDao {
             String sex = rs.getString("sex");
             String username = rs.getString("username");
             int proTitle_id = rs.getInt("proTitle_id");
-            Teacher teacher = new Teacher(id,username,password,name,no,sex,ProTitleDao.getInstance().findProTitle(proTitle_id));
+            Teacher teacher = new Teacher(id,username,password,name,no,sex, ProTitleDao.getInstance().findProTitle(proTitle_id));
             teachers.add(teacher);
         }
         return teachers;
     }
-    public  Teacher find(Integer id)throws SQLException {
+    public Teacher findByNo(String teacher_no) throws SQLException{
+        conn = JdbcHelper.getConn();
+        pstmt = conn.prepareStatement("SELECT * FROM teacher WHERE no =?");
+        pstmt.setString(1,teacher_no);
+        rs = pstmt.executeQuery();
+        Teacher teacher = null;
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            String password = rs.getString("password");
+            String sex = rs.getString("sex");
+            String username = rs.getString("username");
+            int proTitle_id = rs.getInt("proTitle_id");
+            teacher = new Teacher(id,username,password,name,teacher_no,sex, ProTitleDao.getInstance().findProTitle(proTitle_id));
+        }
+        JdbcHelper.close(pstmt,conn);
+        return teacher;
+    }
+    public Teacher find(Integer id)throws SQLException {
         String selectSql="SELECT * FROM teacher WHERE id =?";
         conn = JdbcHelper.getConn();
         pstmt = conn.prepareStatement(selectSql);
@@ -66,7 +87,7 @@ public class TeacherDao {
             String sex = rs.getString("sex");
             String username = rs.getString("username");
             int proTitle_id = rs.getInt("proTitle_id");
-            teacher = new Teacher(id,username,password,name,no,sex,ProTitleDao.getInstance().findProTitle(proTitle_id));
+            teacher = new Teacher(id,username,password,name,no,sex, ProTitleDao.getInstance().findProTitle(proTitle_id));
         }
         JdbcHelper.close(pstmt,conn);
         return teacher;

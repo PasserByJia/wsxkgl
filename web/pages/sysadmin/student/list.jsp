@@ -13,6 +13,8 @@
 </head>
 <body>
 <h1>学生管理</h1>
+<c:url var="addstudentUrl" value="/pages/sysadmin/student/excleInputStudent.jsp"/>
+<a href="${addstudentUrl}">Excel导入学生名单</a>
 <c:url var="addStudentUrl" value="/pages/sysadmin/student/add.jsp"/>
 <a href="${addStudentUrl}">新建</a>
 <c:url var="find" value="studentController" />

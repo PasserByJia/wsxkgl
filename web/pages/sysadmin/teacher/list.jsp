@@ -13,6 +13,8 @@
 </head>
 <body>
 <h1>教师管理</h1>
+<c:url var="addTeacherUrl" value="/pages/sysadmin/teacher/excelInputTeacher.jsp"/>
+<a href="${addTeacherUrl}">Excel导入教师名单</a>
 <c:url var="addTeacherUrl" value="/teacherAddController"/>
 <a href="${addTeacherUrl}">新建</a>
 <c:url var="find" value="teacherController" />

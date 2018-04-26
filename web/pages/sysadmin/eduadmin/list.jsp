@@ -13,6 +13,8 @@
 </head>
 <body>
 <h1>教务管理员管理</h1>
+<c:url var="addeduadminUrl" value="/pages/sysadmin/eduadmin/excleInputEduadmin.jsp"/>
+<a href="${addeduadminUrl}">Excel导入教务管理员名单</a>
 <c:url var="addEduAdminUrl" value="/pages/sysadmin/eduadmin/add.jsp"/>
 <a href="${addEduAdminUrl}">新建</a>
 <c:url var="find" value="eduAdminController" />

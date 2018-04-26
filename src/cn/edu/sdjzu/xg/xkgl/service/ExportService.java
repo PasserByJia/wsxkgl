@@ -1,14 +1,9 @@
 package cn.edu.sdjzu.xg.xkgl.service;
 
-import cn.edu.sdjzu.xg.xkgl.domain.message.Result;
 import cn.edu.sdjzu.xg.xkgl.domain.Student;
-import util.Utils;
+import cn.edu.sdjzu.xg.xkgl.domain.message.Result;
 import org.apache.poi.hssf.usermodel.*;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.ss.usermodel.VerticalAlignment;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import util.Utils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,9 +11,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by kene213 on 2017/4/25.
- */
 
 public class ExportService {
     private static ExportService exportService = new ExportService();
@@ -28,7 +20,7 @@ public class ExportService {
     public static ExportService getInstance(){
         return exportService;
     }
-    final Logger logger = LoggerFactory.getLogger(ExportService.class);
+//    final Logger logger = LoggerFactory.getLogger(ExportService.class);
     public Result exportExcel(List<Student> studentList,
                               HttpServletResponse response,
                               HttpServletRequest request) throws IOException {
@@ -40,11 +32,6 @@ public class ExportService {
         HSSFRow row = sheet.createRow(0);
         //设置表头单元格居中
         HSSFCellStyle style = workbook.createCellStyle();
-        //水平居中
-        style.setAlignment(HorizontalAlignment.CENTER);
-        //垂直居中
-        style.setVerticalAlignment(VerticalAlignment.CENTER);
-
         HSSFFont font = workbook.createFont();
         font.setFontName("宋体");
         font.setFontHeightInPoints((short) 12);
