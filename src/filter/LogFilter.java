@@ -16,7 +16,6 @@ public class LogFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {}
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
-        String loginTime= new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date());
         HttpServletRequest request = (HttpServletRequest)req;
         User user = (User)request.getSession().getAttribute("user");
         if(user == null){
