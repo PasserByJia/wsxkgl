@@ -62,20 +62,20 @@ public class loginController extends HttpServlet {
         }
     }
     protected void toPages(User user,HttpServletRequest request, HttpServletResponse response) throws IOException ,ServletException{
+        HttpSession httpSession = request.getSession();
+        if(user != null){
+            httpSession.setAttribute("user",user);
+        }
         if(user instanceof Teacher){
-            HttpSession httpSession = request.getSession();
             httpSession.setAttribute("teacher",(Teacher)user);
             response.sendRedirect("pages/teacher/menu/index.jsp");
         }else if(user instanceof Student){
-            HttpSession httpSession = request.getSession();
             httpSession.setAttribute("student",(Student)user);
             response.sendRedirect("pages/student/menu/index.jsp");
         }else if(user instanceof EduAdmin){
-            HttpSession httpSession = request.getSession();
             httpSession.setAttribute("eduadmin",(EduAdmin)user);
             response.sendRedirect("pages/eduadmin/index.jsp");
         }else if(user instanceof SysAdmin){
-            HttpSession httpSession = request.getSession();
             httpSession.setAttribute("sysadmin",(SysAdmin)user);
             response.sendRedirect("pages/sysadmin/index.jsp");
         }else {
