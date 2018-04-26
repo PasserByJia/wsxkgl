@@ -1,6 +1,9 @@
 package filter;
 
-import cn.edu.sdjzu.xg16.bysj.domain.User;
+
+
+import cn.edu.sdjzu.xg.xkgl.domain.Student;
+import cn.edu.sdjzu.xg.xkgl.domain.User;
 
 import java.io.*;
 import javax.servlet.*;
@@ -16,16 +19,12 @@ public class LogFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {}
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
-        String loginTime= new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date());
+
         HttpServletRequest request = (HttpServletRequest)req;
         User user = (User)request.getSession().getAttribute("user");
         if(user == null){
-            request.getRequestDispatcher("/login/loginController.do").forward(request,resp);
-        }
-        else {
-            String name = user.getTeacher().getName();
-            String uri = request.getRequestURI();
-            System.out.println(loginTime + " ," +name+ ","+uri+",");
+            request.getRequestDispatcher("/loginController").forward(request,resp);
+        } else {
             chain.doFilter(request,resp);
         }
     }
