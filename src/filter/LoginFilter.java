@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @WebFilter(filterName = "MessageFilter",urlPatterns = {"/*"})
-public class LogFilter implements Filter {
+public class LoginFilter implements Filter {
     @Override
     public void destroy(){}
     @Override
@@ -20,7 +20,7 @@ public class LogFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest)req;
         User user = (User)request.getSession().getAttribute("user");
         if(user == null){
-            request.getRequestDispatcher("/login/loginController.do").forward(request,resp);
+            request.getRequestDispatcher("/loginController").forward(request,resp);
         }
         else {
             chain.doFilter(request,resp);
