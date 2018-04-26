@@ -10,9 +10,9 @@
     <form action="${selectionTimeUrl}" method="post">
 
             <br>
-                开始时间: <input type="date" name="start" />
+                开始时间: <input type="date" name="startDate" /><input type="text" name="startHour" />:<input type="text" name="startMin" />
             <br>
-                结束时间: <input type="date" name="start" />
+                结束时间: <input type="date" name="endDate" /><input type="text" name="endHour" />:<input type="text" name="endMin" />
             <br>
 
         <button>

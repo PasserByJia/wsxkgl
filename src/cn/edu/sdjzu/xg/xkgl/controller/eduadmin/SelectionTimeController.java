@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 
 @WebServlet("/selectionTime")
 public class SelectionTimeController  extends HttpServlet {
@@ -21,27 +19,24 @@ public class SelectionTimeController  extends HttpServlet {
         request.getRequestDispatcher("/pages/eduadmin/selection/selectionTime.jsp").forward(request,response);
     }
     protected void doPost(HttpServletRequest request,HttpServletResponse response) throws  ServletException, IOException {
-        StringBuilder beginTime=new StringBuilder();
-        beginTime.append(request.getParameter("beginYear")+"/"+request.getParameter("beginMonth")+"/").
-                append(request.getParameter("beginDay")+" ").append(request.getParameter("beginHour")+":"+request.getParameter("beginMinute"));
-        StringBuilder endTime=new StringBuilder();
-        endTime.append(request.getParameter("endYear")+"/"+request.getParameter("endMonth")+"/").append(request.getParameter("endDay")+" ")
-                .append(request.getParameter("endHour")+":"+request.getParameter("endMinute"));
-
-        DateFormat df2= new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        String startDateS = request.getParameter("startDate");
+        String startHour = request.getParameter("startHour");
+        String startMin = request.getParameter("startMin");
+        String start =startDateS;
+        String endDateS = request.getParameter("endDate");
+        String endHour = request.getParameter("endHour");
+        String endMin = request.getParameter("endMin");
+        String end =endDateS;
+        Date startDate = Date.valueOf(start);
+        Date endDate = Date.valueOf(end);
+        OpenPeriod openPeriod = new OpenPeriod(1,startDate,endDate);
         try {
-            java.util.Date date0 = df2.parse(beginTime.toString());
-            java.sql.Date sqlDate1 = new java.sql.Date(date0.getTime());
-            java.util.Date date1 = df2.parse(endTime.toString());
-            java.sql.Date sqlDate2 = new java.sql.Date(date1.getTime());
-            OpenPeriod openPeriod = new OpenPeriod(1,sqlDate1,sqlDate2);
             OpenPeriodService.getInstance().update(openPeriod);
-        } catch (SQLException e) {
-            request.setAttribute("message","添加选课时间失败");
+        }catch (SQLException e){
+            request.setAttribute("message","添加时间出错");
             request.getRequestDispatcher("/pages/error.jsp").forward(request,response);
-        }catch (ParseException e) {
-            e.printStackTrace();
         }
+
         response.sendRedirect("/selectionResultController");
     }
 }
