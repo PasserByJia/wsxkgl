@@ -17,6 +17,7 @@ import java.sql.SQLException;
 public class AddSelectionCourse extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //从请求中获取session
         HttpSession httpSession = req.getSession();
         Student student = (Student)httpSession.getAttribute("student");
         Course course = (Course)httpSession.getAttribute("course");
