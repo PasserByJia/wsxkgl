@@ -15,16 +15,21 @@ public class LoginService {
     public static LoginService getInstance(){
         return loginService;
     }
-
+    // 根据用户名和密码找到对应的学生
     public Student findStudent(String username, String password) throws SQLException {
         return LoginDao.getInstance().findStudent(username,password);
     }
+    // 根据用户名和密码找到对应d老师
     public Teacher findTeacher(String username, String password) throws SQLException{
         return LoginDao.getInstance().findTeacher(username,password);
     }
+    // 根据用户名和密码找到对应的教务管理员
+
     public EduAdmin findEduAdmin(String username, String password) throws SQLException{
         return LoginDao.getInstance().findEduAdmin(username,password);
     }
+    // 根据用户名和密码找到对应的系统管理员
+
     public SysAdmin findSysAdmin(String username, String password) throws SQLException{
         return LoginDao.getInstance().findSysAdmin(username,password);
     }

@@ -14,37 +14,43 @@ import java.util.Collection;
 import java.util.List;
 
 public final class StudentService {
+    //创建本类对象
     private static StudentDao studentDao = StudentDao.getInstance();
     private static StudentService studentService = new StudentService();
     public List<Student> studentList;
-
+    //私有构造器
     private StudentService(){}
-
+    //返回本类对象
     public static StudentService getInstance(){
         return studentService;
     }
-
+    //返回所有学生
     public Collection<Student> findAll() throws SQLException{
         return studentDao.findAll();
     }
+    //根据传入参数，返回相应的所有学生
     public Collection<Student> findAll(String conditionStr)throws SQLException{
         return studentDao.findAll(conditionStr);
     }
+    //根据传入参数id，返回相应的学生
+
     public Student find(Integer id) throws SQLException{
         return studentDao.find(id);
     }
+    //根据传入参数username，返回相应的所有学生
+
     public Student findByUsername(String username)throws SQLException{
         return studentDao.findByUsername(username);
     }
-
+    //更新学生信息
     public boolean update(Student student) throws SQLException{
         return studentDao.update(student);
     }
-
+//增加学生
     public boolean add(Student student) throws SQLException{
         return studentDao.add(student);
     }
-
+//根据id，删除相应的学生
     public boolean delete(Integer id)throws Exception{
         Student student = this.find(id);
         return this.delete(student);

@@ -12,15 +12,14 @@ import java.io.IOException;
 
 @WebServlet("/courseExcleInput")
 public class CourseExcleInportController extends HttpServlet {
-//    private File tmpDir = null;
-//    private  String fileName = null;
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doPost(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //获取文件名称
         String filename =  FileUpload.fileUpload(request);
+        //execle导入课程
         ExcleInportCourse.inportCourse(filename,request,response);
     }
 }

@@ -9,30 +9,38 @@ import java.util.Collection;
 import java.util.TreeSet;
 
 public class EduAdminService {
+    //创建本例对象
     private static EduAdminDao eduAdminDao = EduAdminDao.getInstance();
     private  static  EduAdminService eduAdminService = new EduAdminService();
     private static Statement statement = null;
     private static ResultSet rs = null;
     private static PreparedStatement pstmt = null;
+    // 返回本类对象
     public static EduAdminService getInstance(){
         return eduAdminService;
 }
+    //返回所有教务管理员
     public Collection<EduAdmin> findAll() throws SQLException {
         return eduAdminDao.findAll();
     }
+    //根据参数，返回所有相应教务管理员
     public Collection<EduAdmin> findAll(String conditionStr)throws SQLException{
         return eduAdminDao.findAll(conditionStr);
     }
+    //根据id,找到相应的教务管理员
     public EduAdmin find(Integer id) throws SQLException{
         return eduAdminDao.find(id);
     }
+    // 增加教务管理员
     public boolean add(EduAdmin eduAdmin) throws SQLException{
         return  eduAdminDao.add(eduAdmin);
     }
+    //  更新教务管理员信息
     public boolean update(EduAdmin eduAdmin) throws SQLException{
         System.out.println(eduAdmin.getUsername());
         return  eduAdminDao.update(eduAdmin);
     }
+    //根据id,删除相应的教务管理员
     public boolean delete(Integer id)throws SQLException{
         return eduAdminDao.delete(id);
     }
