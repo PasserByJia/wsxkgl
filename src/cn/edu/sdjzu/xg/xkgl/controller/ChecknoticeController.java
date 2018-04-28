@@ -15,6 +15,7 @@ import java.util.TreeSet;
 
 @WebServlet("/checknoticeController")
 public class ChecknoticeController extends HttpServlet{
+    //查看通知详情
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)throws ServletException,IOException {
        int id = Integer.parseInt(req.getParameter("id"));
        System.out.println(id);

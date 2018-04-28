@@ -18,7 +18,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="commons-codec-1.10" level="project" />
+    <orderEntry type="library" name="standard" level="project" />
     <orderEntry type="library" name="xmlbeans-2.3.0" level="project" />
     <orderEntry type="library" name="commons-io-2.6" level="project" />
   </component>
