@@ -22,6 +22,7 @@ public class ChecknoticeController extends HttpServlet{
         try {
             //通过id查找通知
             Notice notice = NoticeService.getInstance().find(id);
+            //将找到的notice存入请求
             req.setAttribute("notice",notice);
             req.getRequestDispatcher("pages/detailedNotice.jsp").forward(req,resp);
         } catch (SQLException e) {
