@@ -27,6 +27,7 @@ public class ChecknoticeController extends HttpServlet{
             //转发页面
             req.getRequestDispatcher("pages/detailedNotice.jsp").forward(req,resp);
         } catch (SQLException e) {
+            //错误转发
             req.setAttribute("message","查看通知详情失败");
             req.getRequestDispatcher("/pages/error.jsp").forward(req,resp);
         }
