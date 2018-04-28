@@ -20,6 +20,7 @@ public class ChecknoticeController extends HttpServlet{
        int id = Integer.parseInt(req.getParameter("id"));
        System.out.println(id);
         try {
+            //通过id查找通知
             Notice notice = NoticeService.getInstance().find(id);
             req.setAttribute("notice",notice);
             req.getRequestDispatcher("pages/detailedNotice.jsp").forward(req,resp);
