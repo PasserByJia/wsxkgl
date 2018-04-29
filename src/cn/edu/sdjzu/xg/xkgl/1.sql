@@ -124,3 +124,13 @@ use xkgl;
         add constraint FKD6A63C28E184DDA
         foreign key (proTitle_id)
         references ProTitle(id);
+INSERT INTO protitle (description, no) VALUES ("教授","01");
+INSERT INTO protitle (description, no) VALUES ("副教授","02");
+INSERT INTO protitle (description, no) VALUES ("讲师","03");
+INSERT INTO protitle (description, no) VALUES ("助教","04");
+INSERT INTO coursetype (description, no) VALUES ("外语与计算机","01");
+INSERT INTO coursetype (description, no) VALUES ("自然工程","02");
+INSERT INTO coursetype (description, no) VALUES ("人文社科","03");
+INSERT INTO coursetype (description, no) VALUES ("经济与管理","04");
+INSERT INTO coursetype (description, no) VALUES ("体育与艺术","05");
+INSERT INTO sysadmin (name, no, password, sex, username)VALUES("admin","admin","admin","男","admin");
