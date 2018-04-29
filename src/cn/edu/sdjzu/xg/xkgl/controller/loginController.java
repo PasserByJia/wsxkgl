@@ -81,21 +81,20 @@ public class loginController extends HttpServlet {
      * @throws ServletException
      */
     protected void toPages(User user,HttpServletRequest request, HttpServletResponse response) throws IOException ,ServletException{
+        HttpSession httpSession = request.getSession();
+        //将user存入session用于登录过滤器
+        httpSession.setAttribute("user",user);
         //instanceof作用：用来判断其左边对象是否为其右边类的实例，返回boolean类型的数据
         if(user instanceof Teacher){
-            HttpSession httpSession = request.getSession();
             httpSession.setAttribute("teacher",(Teacher)user);
             response.sendRedirect("pages/teacher/menu/index.jsp");
         }else if(user instanceof Student){
-            HttpSession httpSession = request.getSession();
             httpSession.setAttribute("student",(Student)user);
             response.sendRedirect("pages/student/menu/index.jsp");
         }else if(user instanceof EduAdmin){
-            HttpSession httpSession = request.getSession();
             httpSession.setAttribute("eduadmin",(EduAdmin)user);
             response.sendRedirect("pages/eduadmin/index.jsp");
         }else if(user instanceof SysAdmin){
-            HttpSession httpSession = request.getSession();
             httpSession.setAttribute("sysadmin",(SysAdmin)user);
             response.sendRedirect("pages/sysadmin/index.jsp");
         }else {

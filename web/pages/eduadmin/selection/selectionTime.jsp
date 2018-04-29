@@ -8,10 +8,13 @@
 <h1>设置选课时间</h1>
     <c:url value="/selectionTime" var="selectionTimeUrl" />
     <form action="${selectionTimeUrl}" method="post">
-
+        当前选课时间:${startDate}-${endDate}
+            <br>
+                重新设置选课时间
             <br>
                 开始时间: <input type="date" name="startDate" /><input type="text" name="startHour" />:<input type="text" name="startMin" />
             <br>
+
                 结束时间: <input type="date" name="endDate" /><input type="text" name="endHour" />:<input type="text" name="endMin" />
             <br>
 

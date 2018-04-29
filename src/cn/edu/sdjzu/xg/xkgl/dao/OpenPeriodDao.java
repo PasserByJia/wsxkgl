@@ -37,8 +37,8 @@ public class OpenPeriodDao {
         //遍历结果集放到集合中
         while(rs.next()){
             Integer id = rs.getInt("id");
-            Date startTime=rs.getDate("");
-            Date endTime=rs.getDate("");
+            Timestamp  startTime=rs.getTimestamp ("");
+            Timestamp  endTime=rs.getTimestamp ("");
             OpenPeriod desiredopenPeriod=new OpenPeriod(id,startTime,endTime);
             openPeriods.add(desiredopenPeriod);
         }
@@ -64,8 +64,8 @@ public class OpenPeriodDao {
         ResultSet resultSet = preparedStatement.executeQuery();
         //获得结果集，对选课时间属性赋值
         while (resultSet.next()){
-            Date startTime = resultSet.getDate("startTime");
-            Date endTime = resultSet.getDate("endTime");
+            Timestamp  startTime = resultSet.getTimestamp ("startTime");
+            Timestamp  endTime = resultSet.getTimestamp ("endTime");
             desiredopenPeriod = new OpenPeriod(id,startTime,endTime);
         }
         //关闭资源
@@ -84,8 +84,8 @@ public class OpenPeriodDao {
                         "endTime=?" +
                         " WHERE id=?");
         //对预编译语句对象的参数赋值
-        preparedStatement.setDate(1,openPeriod.getStartTime());
-        preparedStatement.setDate(2,openPeriod.getEndTime());
+        preparedStatement.setTimestamp (1,openPeriod.getStartTime());
+        preparedStatement.setTimestamp (2,openPeriod.getEndTime());
         preparedStatement.setInt(3,openPeriod.getId());
         //执行预编译语句，用其返回值、影响的行数为赋值affectedRowNum
         int affectedRowNum = preparedStatement.executeUpdate();

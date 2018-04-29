@@ -2,26 +2,26 @@ package cn.edu.sdjzu.xg.xkgl.domain;
 
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class OpenPeriod  implements Comparable<OpenPeriod>,Serializable
 {
 	private int id;
 
-	private Date startTime;
+	private Timestamp startTime;
 
-	private Date endTime;
+	private Timestamp  endTime;
 
 	public OpenPeriod(){
 		super();
 	}
 
-	public OpenPeriod(int id, Date startTime, Date endTime) {
+	public OpenPeriod(int id, Timestamp  startTime, Timestamp  endTime) {
 		this.id = id;
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
-	public OpenPeriod(Date startTime, Date endTime) {
+	public OpenPeriod(Timestamp  startTime, Timestamp  endTime) {
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
@@ -33,19 +33,19 @@ public class OpenPeriod  implements Comparable<OpenPeriod>,Serializable
 		this.id = id;
 	}
 
-	public Date getStartTime() {
+	public Timestamp  getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(Timestamp  startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public Timestamp  getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(Timestamp  endTime) {
 		this.endTime = endTime;
 	}
 
