@@ -22,7 +22,7 @@ ${student.name}学生<br/>
 <c:url var="SelectionControllerUrl" value="/selectionController"/>
 <a href="${SelectionControllerUrl}" target="main">选课</a>
 <br/>
-<c:url var="ResultsControllerUrl" value="/resultsController"/>
+<c:url var="ResultsControllerUrl" value="/courseSelectionOfStudentController"/>
 <a href="${ResultsControllerUrl}" target="main">查看选课结果</a>
 <br/>
 <c:url value="/pages/updatePassword.jsp" var="updatePassword"/>
