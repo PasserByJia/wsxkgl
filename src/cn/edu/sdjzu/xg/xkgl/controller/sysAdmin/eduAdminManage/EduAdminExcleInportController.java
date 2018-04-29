@@ -20,7 +20,9 @@ public class EduAdminExcleInportController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //从请求对象中获取文件存到服务器
         String filename =  FileUpload.fileUpload(request);
+        //从服务器中读取文件并存到数据库
         ExcelInportEduadmin.inportEduadmin(filename,request,response);
     }
 

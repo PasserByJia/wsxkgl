@@ -17,21 +17,25 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+//将此类声明为Servlet,exportConntroller是该类的映射地址
 @WebServlet("/exportController")
 public class ExportController extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //获取请求传入的cource对象的id参数值
         int course_id = Helper.getIdFromRequest(request,"courseId");
+        //List集合用来存放与cource的id相关联的student对象
         List<Student> students = null;
         try{
+            //students为名的集合中保存通过cource_id获取与cource的id相关联的student对象
             students= CourseSelectionService.getCourseSelectionService().findStudentByCourseId(course_id);
-        }catch (SQLException e){}
+        }catch (SQLException e){}//异常处理,调用exportException方法
         this.exportExcel(response,request,students);
 
     }
+    //获得ExportService的实例
     ExportService exportService = ExportService.getInstance();
     /**
      * 导出excel
-     * @param
      */
     public Result exportExcel(HttpServletResponse response,
                               HttpServletRequest request,List<Student> studentList) throws IOException {
