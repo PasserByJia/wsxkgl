@@ -37,7 +37,6 @@ public class CourseController extends HttpServlet {
             req.setAttribute("courses",courses);
             //请求转发到指定页面
             req.getRequestDispatcher("pages/eduadmin/course/courseList.jsp").forward(req,resp);
-
         }catch(SQLException e){
             //打印异常信息
             e.printStackTrace();
