@@ -40,7 +40,6 @@ public class CourseControllerAdd extends HttpServlet{
             //请求转发到指定页面
             request.getRequestDispatcher("/pages/error.jsp").forward(request,response);
         }
-
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
