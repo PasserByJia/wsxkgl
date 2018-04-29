@@ -27,7 +27,7 @@ public class CourseSelectionOfStudentController extends HttpServlet{
         //在session对象获得student属性值
         Student student = (Student) req.getSession().getAttribute("student");
         try {
-            //获得student_id对应的courseSelection对象
+            //获得student_id对应courseSelection对象
             courseSelections = CourseSelectionDao.getInstance().findByStudentId(student.getId());
             //遍历输出选课结果
             for (CourseSelection cou:courseSelections) {

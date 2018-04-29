@@ -14,19 +14,19 @@
 <body>
 ${student.name}学生<br/>
 <c:url var="logoutUrl" value="/logout" />
-<a href="${logoutUrl}" target="_top">安全退出</a>
+<a href="${logoutUrl}" target="_top"> 安全退出 </a>
 <br/>
 <c:url var="NoticeControllerUrl" value="/noticeController"/>
-<a href="${NoticeControllerUrl}" target="main">查看通知</a>
+<a href="${NoticeControllerUrl}" target="main"> 查看通知 </a>
 <br/>
 <c:url var="SelectionControllerUrl" value="/selectionController"/>
-<a href="${SelectionControllerUrl}" target="main">选课</a>
+<a href="${SelectionControllerUrl}" target="main"> 选课 </a>
 <br/>
 <c:url var="ResultsControllerUrl" value="/courseSelectionOfStudentController"/>
-<a href="${ResultsControllerUrl}" target="main">查看选课结果</a>
+<a href="${ResultsControllerUrl}" target="main"> 查看选课结果 </a>
 <br/>
 <c:url value="/pages/updatePassword.jsp" var="updatePassword"/>
-<a href="${updatePassword}"  target="main" >修改密码</a>
+<a href="${updatePassword}"  target="main" > 修改密码 </a>
 <br/>
 </body>
 </html>
