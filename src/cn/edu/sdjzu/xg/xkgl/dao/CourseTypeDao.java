@@ -13,7 +13,9 @@ import java.util.HashSet;
 
 
 public class CourseTypeDao {
+    //构造器定义为private，“阻止”其它类创建本类的对象
     private CourseTypeDao(){}
+    //创建本类惟一对象
     private static CourseTypeDao courseTypeDao;
     public static CourseTypeDao getInstance(){
         if (courseTypeDao==null){
@@ -34,12 +36,15 @@ public class CourseTypeDao {
                 connection.prepareStatement("SELECT * FROM coursetype");
         //执行预编译语句，结果集保存在rs对象中
         ResultSet rs = preparedStatement.executeQuery();
+        //课程类型集合
         Collection<CourseType> courseTypes =new HashSet<CourseType>();
+        //获得结果集，对课程类型对象属性赋值
         while (rs.next()){
             Integer id=rs.getInt("id");
             String description=rs.getString("description");
             String no=rs.getString("no");
             CourseType desiredcourseType=new CourseType(id,description,no);
+            //保存在集合中
             courseTypes.add(desiredcourseType);
         }
         //关闭资源
@@ -54,13 +59,17 @@ public class CourseTypeDao {
         PreparedStatement preparedStatement =connection.prepareStatement("SELECT * FROM coursetype WHERE description=?");
         //对预编译语句对象的参数赋值
         preparedStatement.setString(1,des);
+        //执行预编译语句，返回结果集
         ResultSet rs = preparedStatement.executeQuery();
+        //课程类型集合
         Collection<CourseType> courseTypes =new HashSet<CourseType>();
+        //获得结果集，对课程类型对象属性赋值
         while (rs.next()){
             Integer id=rs.getInt("id");
             String description=rs.getString("description");
             String no=rs.getString("no");
             CourseType desiredcourseType=new CourseType(id,description,no);
+            //保存在集合中
             courseTypes.add(desiredcourseType);
         }
         //关闭资源
@@ -69,7 +78,7 @@ public class CourseTypeDao {
         return courseTypes;
     }
     /**
-     *
+     * 增加课程类型
      * @return 成功增加：true，失败：false
      * @throws SQLException
      */
@@ -94,8 +103,8 @@ public class CourseTypeDao {
         return affectedRowNum >0;
     }
     /**
-     *
-     * @return 成功增加：true，失败：false
+     *更改课程类型
+     * @return 成功更改：true，失败：false
      * @throws SQLException
      */
     public boolean update(CourseType courseType) throws SQLException {
@@ -119,7 +128,7 @@ public class CourseTypeDao {
         return affectedRowNum >0;
     }
     /**
-     *
+     * 通过id查找课程类型
      * @param id 目标对象对应的记录的id字段值
      * @throws SQLException
      */
@@ -135,7 +144,7 @@ public class CourseTypeDao {
         preparedStatement.setInt(1,id);
         //执行预编译语句，结果集保存在resultSet对象中
         ResultSet resultSet = preparedStatement.executeQuery();
-        //遍历resultSet对象
+        //遍历结果集，对课程类型对象属性赋值
         if(resultSet.next()){
             String description = resultSet.getString("description");
             String no = resultSet.getString("no");
@@ -145,6 +154,7 @@ public class CourseTypeDao {
         JdbcHelper.close(preparedStatement,connection);
         return desiredCourseType;
     }
+    /*通过id删除课程类型*/
     public boolean delete(int id) throws SQLException{
         //获得数据库连接对象
         Connection conn = JdbcHelper.getConn();
@@ -159,7 +169,9 @@ public class CourseTypeDao {
         //如果影响的行数大于0，则返回true，否则返回false
         return rowAffected>0;
     }
+    /*删除一个课程类型*/
     public boolean delete(CourseType courseType) throws SQLException {
+        //通过id删除课程类型
         return this.delete(courseType.getId());
     }
 }
