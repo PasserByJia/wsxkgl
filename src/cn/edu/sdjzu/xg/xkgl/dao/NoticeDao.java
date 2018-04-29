@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.TreeSet;
 
 public class NoticeDao {
-    //声明数据库的各个对象
+    //声明数据库的各个对象的引用
     private static Connection conn = null;
     private static Statement statement = null;
     private static ResultSet rs = null;
@@ -19,14 +19,16 @@ public class NoticeDao {
 
     //声明userDao对象引用
     private static NoticeDao noticeDao = null;
-    //返回(不是创建)
+    //返回本类的惟一对象
     public static NoticeDao getInstance() {
         if(NoticeDao.noticeDao==null){
             NoticeDao.noticeDao = new NoticeDao();
         }
         return NoticeDao.noticeDao;
     }
+    /*查找所有通知*/
     public Collection<Notice> findAll() throws SQLException {
+        //通知集合
         Collection<Notice> notices = new TreeSet<>();
         //sql语句查询所有的课题
         String selectSql = "SELECT * FROM notice";
@@ -46,16 +48,23 @@ public class NoticeDao {
             Notice notice = new Notice(id,title,text,issueTime,EduAdminDao.getInstance().find(eduAdmin_id));
             notices.add(notice);
         }
+        //关闭资源
         JdbcHelper.close(statement,conn);
         return notices;
     }
+    /*通过id查找所有通知*/
     public Notice find(int id) throws SQLException{
+        //声明通知引用
         Notice notice = null;
+        //获取数据库连接对象
         conn = JdbcHelper.getConn();
+        //根据连接对象准备查询语句对象
         pstmt = conn.prepareStatement("SELECT * FROM notice WHERE id=?");
         //对预编译语句对象的参数赋值
         pstmt.setInt(1,id);
+        //执行预编译语句，返回结果集
         rs = pstmt.executeQuery();
+        //获得结果集，对通知对象属性赋值
         while (rs.next()){
             Date issueTime = rs.getDate("issueTime");
             String text = rs.getString("text");
@@ -66,6 +75,7 @@ public class NoticeDao {
         JdbcHelper.close(pstmt,conn);
         return  notice;
     }
+    /*增加一个通知*/
     public boolean add(Notice notice) throws SQLException{
         //sql插入语句
         String addSql="INSERT INTO notice("
@@ -78,20 +88,21 @@ public class NoticeDao {
         conn = JdbcHelper.getConn();
         //根据连接对象准备语句对象，如果SQL语句为多行，注意语句不同部分之间要有空格
         pstmt = conn.prepareStatement("insert into notice " +
-                        " (issueTime, text, title, eduAdmin_id)" +
-                        " values(?,?,?,?)");
+                " (issueTime, text, title, eduAdmin_id)" +
+                " values(?,?,?,?)");
         //对预编译语句对象的参数赋值
         pstmt.setDate(1, (java.sql.Date) notice.getIssueTime());
         pstmt.setString(2,notice.getText());
         pstmt.setString(3,notice.getTitle());
         pstmt.setInt(4,notice.getEduAdmin().getId());
-
+        //执行插入语句，返回受影响的行数
         int rowAffected = pstmt.executeUpdate();
         //关闭资源
         JdbcHelper.close(pstmt, conn);
         //如果影响的行数大于0，则返回true，否则返回false
         return rowAffected > 0;
     }
+    /*更改通知*/
     public boolean update(Notice notice) throws SQLException{
         //sql更新语句
         String updateSql="UPDATE notice SET "
@@ -110,14 +121,15 @@ public class NoticeDao {
         pstmt.setString(3,notice.getTitle()+"");
         pstmt.setInt(4,notice.getEduAdmin().getId());
         pstmt.setString(5,notice.getId()+"");
-        //执行更新语句
+        //执行更新语句，返回受影响的行数
         int rowAffected = pstmt.executeUpdate();
         //关闭资源
         JdbcHelper.close(pstmt,conn);
+        //如果影响的行数大于0，则返回true，否则返回false
         return rowAffected>0;
     }
+    /*通过id删除通知*/
     public boolean delete(Integer id)throws SQLException{
-
         //sql删除语句
         String deleteSql="DELETE FROM notice WHERE id=?";
         //得到数据库连接对象
@@ -126,14 +138,14 @@ public class NoticeDao {
         pstmt = conn.prepareStatement(deleteSql);
         //对预编译语句对象的参数赋值
         pstmt.setInt(1, id);
-        //执行删除操作
+        //执行删除操作，返回受影响的行数
         int rowAffected = pstmt.executeUpdate();
         //关闭资源
         JdbcHelper.close(pstmt,conn);
+        //如果影响的行数大于0，则返回true，否则返回false
         return rowAffected>0;
     }
-
-
+    /*删除通知*/
     public boolean delete(Notice notice)throws SQLException{
         //sql删除语句
         String deleteSql="DELETE FROM notice WHERE id=?";
@@ -143,10 +155,11 @@ public class NoticeDao {
         pstmt = conn.prepareStatement(deleteSql);
         //对预编译语句对象的参数赋值
         pstmt.setInt(1, notice.getId());
-        //执行删除操作
+        //执行删除操作，返回受影响的行数
         int rowAffected = pstmt.executeUpdate();
         //关闭资源
         JdbcHelper.close(pstmt,conn);
+        //如果影响的行数大于0，则返回true，否则返回false
         return rowAffected>0;
     }
 }

@@ -11,18 +11,29 @@ import java.util.Collection;
 import java.util.TreeSet;
 
 public class SysAdminDao {
+    //声明数据库的各个对象的引用
     private static Connection conn = null;
     private static ResultSet rs = null;
     private static PreparedStatement pstmt = null;
     private static SysAdminDao sysAdminDao = new SysAdminDao();
+    //构造器定义为private，“阻止”其它类创建本类的对象
     private SysAdminDao (){}
+    //返回本类的惟一对象
     public static SysAdminDao getInstance(){return  sysAdminDao;}
+    //系统管理员集合
     private Collection<SysAdminDao> sysAdminDaos;
+
+    /*查找所有系统管理员*/
     public  Collection<SysAdmin> findAll()throws SQLException{
+        //系统管理员集合
         Collection<SysAdmin> sysAdmins = new TreeSet<SysAdmin>();
+        //获取数据库连接对象
         conn = JdbcHelper.getConn();
+        //根据连接对象准备语句对象
         pstmt = conn.prepareStatement("SELECT * FROM sysadmin");
+        //执行预编译语句，返回结果集
         rs = pstmt.executeQuery();
+        //获得结果集，对系统管理员对象属性赋值
         while (rs.next()){
             int id = rs.getInt("id");
             String name = rs.getString("name");
@@ -33,6 +44,7 @@ public class SysAdminDao {
             SysAdmin sysAdmin = new SysAdmin(id,name,no,password,sex,username);
             sysAdmins.add(sysAdmin);
         }
+        //关闭资源
         JdbcHelper.close(pstmt,conn);
         return sysAdmins;
 
@@ -40,12 +52,17 @@ public class SysAdminDao {
 
     //根据ID，获取到对应的SysAdminDao
     public  SysAdmin find(Integer id)throws SQLException {
+        //声明引用
         SysAdmin sysAdmin = null;
+        //获取数据库连接对象
         Connection connection = JdbcHelper.getConn();
+        //根据连接对象准备语句对象
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM sysadmin WHERE id=?");
         //对预编译语句对象的参数赋值
         preparedStatement.setInt(1,id);
+        //执行预编译语句，返回结果集
         ResultSet resultSet = preparedStatement.executeQuery();
+        //获得结果集，对系统管理员对象属性赋值
         while (resultSet.next()){
             String name = resultSet.getString("name");
             String no = resultSet.getString("no");
@@ -54,11 +71,12 @@ public class SysAdminDao {
             String username = resultSet.getString("username");
             sysAdmin = new SysAdmin(id,name,no,password,sex,username);
         }
+        //关闭资源
         JdbcHelper.close(preparedStatement,connection);
         return  sysAdmin;
     }
 
-    //修改SysAdminDao
+    //修改SysAdmin
     public boolean update(SysAdmin sysAdmin)throws SQLException{
         //获取数据库连接
         conn = JdbcHelper.getConn();

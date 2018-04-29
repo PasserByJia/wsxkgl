@@ -8,8 +8,11 @@ import java.util.Collection;
 import java.util.HashSet;
 
 public class OpenPeriodDao {
+    //构造器定义为private，“阻止”其它类创建本类的对象
     private OpenPeriodDao(){}
+    //声明openPeriodDao对象引用
     private static OpenPeriodDao openPeriodDao;
+    //返回本类的惟一对象
     public static OpenPeriodDao getInstance(){
         if(openPeriodDao==null){
             openPeriodDao=new OpenPeriodDao();
@@ -18,7 +21,7 @@ public class OpenPeriodDao {
     }
 
     /**
-     * 返回所有的openPeriod对象
+     * 返回所有的选课时间对象
      * @throws SQLException
      */
     public Collection<OpenPeriod> findAll() throws SQLException {
@@ -29,7 +32,9 @@ public class OpenPeriodDao {
                 connection.prepareStatement("SELECT * FROM openperiod");
         //执行预编译语句，结果保存在rs对象中
         ResultSet rs = preparedStatement.executeQuery();
+        //选课时间集合
         Collection<OpenPeriod> openPeriods=new HashSet<OpenPeriod>();
+        //遍历结果集放到集合中
         while(rs.next()){
             Integer id = rs.getInt("id");
             Date startTime=rs.getDate("");
@@ -47,24 +52,28 @@ public class OpenPeriodDao {
      * 根据ID，获取到对应的openPeriod
      */
     public  OpenPeriod findAll(Integer id)throws SQLException {
+        //声明选课时间引用
         OpenPeriod desiredopenPeriod = null;
+        //获取数据库连接对象
         Connection connection = JdbcHelper.getConn();
+        //根据连接对象准备查询语句对象
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM openperiod WHERE id=?");
         //对预编译语句对象的参数赋值
         preparedStatement.setInt(1,id);
+        //执行预编译语句，返回结果集
         ResultSet resultSet = preparedStatement.executeQuery();
+        //获得结果集，对选课时间属性赋值
         while (resultSet.next()){
             Date startTime = resultSet.getDate("startTime");
             Date endTime = resultSet.getDate("endTime");
             desiredopenPeriod = new OpenPeriod(id,startTime,endTime);
         }
+        //关闭资源
         JdbcHelper.close(preparedStatement,connection);
         return  desiredopenPeriod;
     }
 
-    /**
-     * 修改
-     */
+    /*更改选课时间*/
     public Boolean update(OpenPeriod openPeriod)throws SQLException{
         //获取数据库连接
         Connection connection = JdbcHelper.getConn();

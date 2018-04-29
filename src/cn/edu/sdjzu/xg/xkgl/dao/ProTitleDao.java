@@ -12,8 +12,9 @@ import java.util.Collection;
 import java.util.HashSet;
 
 public class ProTitleDao {
-
+        //构造器定义为private，“阻止”其它类创建本类的对象
         private ProTitleDao(){}
+        //声明proTitleDao对象引用
         private static ProTitleDao proTitleDao = new ProTitleDao();
         public static ProTitleDao getInstance(){
             return proTitleDao;
@@ -30,7 +31,9 @@ public class ProTitleDao {
                     connection.prepareStatement("SELECT * FROM protitle");
             //执行预编译语句，结果集保存在rs对象中
             ResultSet rs = preparedStatement.executeQuery();
+            //职称集合
             Collection<ProTitle> proTitles =new HashSet<ProTitle>();
+            //遍历结果集放到集合中
             while (rs.next()){
                 Integer id=rs.getInt("id");
                 String description=rs.getString("description");
@@ -44,12 +47,11 @@ public class ProTitleDao {
             return proTitles;
         }
         /**
-         *
+         *增加职称
          * @return 成功增加：true，失败：false
          * @throws SQLException
          */
         public boolean add(ProTitle proTitle) throws SQLException {
-
             //获得数据库连接对象
             Connection connection = JdbcHelper.getConn();
             //根据连接对象准备语句对象，如果SQL语句为多行，注意语句不同部分之间要有空格
@@ -69,8 +71,8 @@ public class ProTitleDao {
             return affectedRowNum >0;
         }
         /**
-         *
-         * @return 成功增加：true，失败：false
+         *更改职称
+         * @return 成功更改：true，失败：false
          * @throws SQLException
          */
         public boolean update(ProTitle proTitle) throws SQLException {
@@ -94,7 +96,7 @@ public class ProTitleDao {
             return affectedRowNum >0;
         }
         /**
-         *
+         *通过id查找职称
          * @param id 目标对象对应的记录的id字段值
          * @throws SQLException
          */
@@ -120,6 +122,7 @@ public class ProTitleDao {
             JdbcHelper.close(preparedStatement,connection);
             return desiredProTitle;
         }
+        /*通过id删除职称*/
         public boolean delete(int id) throws SQLException{
             //获得数据库连接对象
             Connection conn = JdbcHelper.getConn();
@@ -134,7 +137,9 @@ public class ProTitleDao {
             //如果影响的行数大于0，则返回true，否则返回false
             return rowAffected>0;
         }
+        /*删除职称*/
         public boolean delete(ProTitle proTitle) throws SQLException {
+            //通过id删除职称
             return this.delete(proTitle.getId());
         }
 }
