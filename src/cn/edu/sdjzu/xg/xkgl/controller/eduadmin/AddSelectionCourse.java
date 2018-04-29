@@ -36,6 +36,5 @@ public class AddSelectionCourse extends HttpServlet {
             //请求转发到error页面
             req.getRequestDispatcher("/pages/error.jsp").forward(req,resp);
         }
-
     }
 }
