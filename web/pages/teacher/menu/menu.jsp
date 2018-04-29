@@ -20,7 +20,7 @@ ${teacher.name}  &nbsp;&nbsp;&nbsp;&nbsp;
 <c:url var="NoticeControllerUrl" value="/noticeController"/>
 <a href="${NoticeControllerUrl}" target="main">查看通知</a>
 <br/>
-<c:url var="ResultsControllerUrl" value="/teacherResultsController"/>
+<c:url var="ResultsControllerUrl" value="/courseOfTeacherController"/>
 <a href="${ResultsControllerUrl}" target="main">查看选课结果</a>
 <br/>
 <c:url var="updatePassword" value="/pages/updatePassword.jsp"/>
