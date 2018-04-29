@@ -77,6 +77,9 @@ public final class TeacherService {
             }
             return deleted;
         }
+    public Teacher findByNo(String teacher_no) throws SQLException{
+        return teacherDao.findByNo(teacher_no);
+    }
 }
 
 
