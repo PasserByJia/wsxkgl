@@ -134,3 +134,4 @@ INSERT INTO coursetype (description, no) VALUES ("人文社科","03");
 INSERT INTO coursetype (description, no) VALUES ("经济与管理","04");
 INSERT INTO coursetype (description, no) VALUES ("体育与艺术","05");
 INSERT INTO sysadmin (name, no, password, sex, username)VALUES("admin","admin","admin","男","admin");
+insert into openperiod(startTime,endTime) values('1900-01-01 00:00:00','1900-01-01 00:00:01');
